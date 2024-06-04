@@ -50,9 +50,18 @@ android {
         }
     }
 
-    //room schema Directory
+    //room schema Directory may be duplicate
     room {
         schemaDirectory("$projectDir/schemas")
+    }
+
+    //may be duplicate with room schema top
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
+        }
     }
 }
 
@@ -94,6 +103,11 @@ dependencies {
     //dagger
     implementation("com.google.dagger:dagger:2.51.1")
     kapt("com.google.dagger:dagger-compiler:2.51.1")
+
+    //navigation compose
+    val nav_version = "2.7.7"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     val lifecycle_version = "2.8.1"
    // val arch_version = "2.2.0"
